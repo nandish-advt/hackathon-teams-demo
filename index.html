@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Team Review Dashboard</title>
+    <style>
+        /* ================================================
+           COLOR THEME - Change colors here
+           ================================================ */
+        :root {
+            /* Primary Colors */
+            --primary-color: #2c3e50;          /* Main brand color - dark blue-gray */
+            --primary-dark: #1a252f;           /* Darker shade */
+            --primary-light: #34495e;          /* Lighter shade */
+            
+            /* Accent Colors */
+            --accent-color: #3498db;           /* Accent blue */
+            --accent-hover: #2980b9;           /* Accent hover */
+            --success-color: #27ae60;          /* Green for success/live demos */
+            --success-hover: #229954;          /* Success hover */
+            --danger-color: #e74c3c;           /* Red for likes */
+            
+            /* Background Colors */
+            --bg-gradient-start: #ecf0f1;      /* Light gray */
+            --bg-gradient-end: #bdc3c7;        /* Medium gray */
+            --card-bg: #ffffff;                /* White cards */
+            --card-header-bg: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            
+            /* Text Colors */
+            --text-primary: #2c3e50;           /* Main text */
+            --text-secondary: #7f8c8d;         /* Secondary text */
+            --text-light: #95a5a6;             /* Light text */
+            --text-white: #ffffff;             /* White text */
+            
+            /* Border & Divider Colors */
+            --border-color: #dfe6e9;           /* Light borders */
+            --border-hover: #b2bec3;           /* Hover borders */
+            
+            /* Tag Colors */
+            --tag-member-bg: #ecf0f1;          /* Member tags */
+            --tag-member-text: #2c3e50;
+            --tag-tech-bg: #e8f4f8;            /* Tech stack tags */
+            --tag-tech-text: #2c3e50;
+            
+            /* Shadow */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            
+            /* Category Badge Opacity */
+            --badge-opacity: 0.25;
+        }
+
+        /* ================================================
+           Alternative Color Schemes (Uncomment to use)
+           ================================================ */
+        
+        /* Modern Blue Theme */
+        /*
+        :root {
+            --primary-color: #0066cc;
+            --primary-dark: #0052a3;
+            --primary-light: #3385d6;
+            --accent-color: #00a8e8;
+            --accent-hover: #0090c8;
+            --bg-gradient-start: #f0f4f8;
+            --bg-gradient-end: #d9e2ec;
+        }
+        */
+        
+        /* Purple Professional Theme */
+        /*
+        :root {
+            --primary-color: #5a4fcf;
+            --primary-dark: #4a3fb5;
+            --primary-light: #6d5fd8;
+            --accent-color: #8b7ee8;
+            --accent-hover: #7568d4;
+            --bg-gradient-start: #f4f3ff;
+            --bg-gradient-end: #e0dcff;
+        }
+        */
+        
+        /* Green Corporate Theme */
+        /*
+        :root {
+            --primary-color: #047857;
+            --primary-dark: #065f46;
+            --primary-light: #059669;
+            --accent-color: #10b981;
+            --accent-hover: #059669;
+            --bg-gradient-start: #f0fdf4;
+            --bg-gradient-end: #d1fae5;
+        }
+        */
+
+        /* ================================================
+           Base Styles
+           ================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 32px;
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .team-count {
+            background: var(--primary-color);
+            color: var(--text-white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Search and Filter */
+        .controls {
+            background: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            color: var(--text-primary);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .filter-select {
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-in;
+            border: 1px solid var(--border-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+
+        .card-header {
+            background: var(--card-header-bg);
+            padding: 20px;
+            color: var(--text-white);
+        }
+
+        .card-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .project-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .category-badge {
+            background: rgba(255, 255, 255, var(--badge-opacity));
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .team-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .team-name {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .team-size {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--border-color);
+            color: var(--text-secondary);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag.member {
+            background: var(--tag-member-bg);
+            color: var(--tag-member-text);
+            border: 1px solid var(--border-color);
+        }
+
+        .tag.tech {
+            background: var(--tag-tech-bg);
+            color: var(--tag-tech-text);
+            border: 1px solid var(--border-color);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text-white);
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--success-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--success-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 20px;
+            background: #fafbfc;
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action:hover {
+            color: var(--primary-color);
+        }
+
+        .action.liked {
+            color: var(--danger-color);
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .no-results-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .no-results h2 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-primary);
+        }
+
+        .spinner {
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <span class="logo">🏆</span>
+                <h1>Hackathon Team Review Dashboard</h1>
+            </div>
+            <div class="team-count">
+                <span>👥</span>
+                <span id="teamCount">13 Teams</span>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search teams or projects...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <select class="filter-select" id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="AI & Innovation">AI & Innovation</option>
+                <option value="DevOps">DevOps</option>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Automation">Automation</option>
+                <option value="Tool">Tool</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="Application Enhancement">Application Enhancement</option>
+                <option value="Browser Extension">Browser Extension</option>
+                <option value="API Testing">API Testing</option>
+                <option value="Mobile App">Mobile App</option>
+            </select>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid" id="projectGrid"></div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h2>No Projects Found</h2>
+            <p>Try adjusting your search or filter criteria</p>
+        </div>
+    </div>
+
+    <script>
+        // Mock Data
+        const teams = [
+            {
+                id: 1,
+                projectName: "Powering Retain With AI",
+                teamName: "Powering Retain With AI",
+                category: "AI & Innovation",
+                teamSize: 1,
+                description: "A Retain AI MCP server that allows users to interact with Retain using natural language",
+                members: ["Ranjan, Rajeev"],
+                techStack: ["ASP.NET Core 8.0", "C#", "Model Context Protocol (MCP)", "Identity Server"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063097_advt-group_com/IQAhwbFeJ2GkRK1UUzu9gPnPAf9zceuTwxk6tKOn5IYAf1w?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=oZkgDa",
+                liveUrl: null,
+                liked: false,
+                comments: 1
+            },
+            {
+                id: 2,
+                projectName: "Azure Key Vault Manager",
+                teamName: "Keyvault Utility",
+                category: "DevOps",
+                teamSize: 2,
+                description: "A lightweight app to securely update Key Vaults without granting full access. This would reduce manual changes and enable audit tracking.",
+                members: ["Sargur, Nandish", "Yadav, Mritunjay"],
+                techStack: ["Azure", "Key Vault", "React", "Javascript", "ASP.NET Core", "DevOps", "C#"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063100_advt-group_com/IQBhZocjucTlQrb8fe3mU2aRAcXBTPxvoDl9KNuH8t-_Fmw?e=Z2dKPm",
+                liveUrl: "https://hackathon-frontend-efgyhhd8dnhpgahb.eastus-01.azurewebsites.net/",
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 3,
+                projectName: "DevOps Cost Optimization",
+                teamName: "Nagaraj, Varun",
+                category: "DevOps",
+                teamSize: 1,
+                description: "Identify unused resources and highlight cost-saving opportunities and best practices.",
+                members: ["Nagaraj, Varun"],
+                techStack: ["Azure", "Cost Management", "PowerBI", "Python"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 4,
+                projectName: "Virtual Desktop (IT)",
+                teamName: "Virtual Desktop (IT)",
+                category: "Infrastructure",
+                teamSize: 1,
+                description: "Explore virtual desktop solutions for improved flexibility and security.",
+                members: ["Ashokkumar, Ragu"],
+                techStack: ["Azure Virtual Desktop", "Windows 365", "Citrix"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 5,
+                projectName: "AI QA Assistant",
+                teamName: "AI QA Assistant",
+                category: "Automation",
+                teamSize: 4,
+                description: "Automating the Web Using Natural Language",
+                members: ["Sourabh SS", "Auditya Reddy", "Draxayani Patil", "Hariprasath Padmanaban"],
+                techStack: ["Playwright", "Model Context Protocol (MCP)"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:f:/g/personal/p95063095_advt-group_com/IgDiA9cgRgWrRrMtPy95S_3HAQpPXNQv7sW3K5QcCEoKiXw?e=fs1wmV",
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 6,
+                projectName: "Automated Database Change Tracker And Wiki Updater",
+                teamName: "Automated Database Change Tracker And Wiki Updater",
+                category: "Tool",
+                teamSize: 2,
+                description: "An automated tool that tracks database schema changes and updates the project wiki in real time for seamless documentation.",
+                members: ["Karthik SR", "Chethan Murthy"],
+                techStack: ["Asp.Net", "C#"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063093_advt-group_com/IQCPCKOznrVgQ6k0b_1RZ5CCAZ5dytSXD3uFJQ1Mh9CFeZY?e=q2WD7R&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
+                liveUrl: null,
+                liked: true,
+                comments: 0
+            },
+            {
+                id: 7,
+                projectName: "Product Usage Tracking",
+                teamName: "Product Usage Tracking",
+                category: "Tool",
+                teamSize: 3,
+                description: "Interactive dashboard for tracking and optimizing cloud spending across multiple providers.",
+                members: ["Vani H U", "Abhishek Anand", "Shaila"],
+                techStack: ["Asp.Net", "C#", "React"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063099_advt-group_com/IQDLwA6-H1H-QIs7br70Jp73AWAtNT7SBxkkVAnEEF3bvEQ?e=R1HxtH",
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 8,
+                projectName: "Anomaly Detection",
+                teamName: "Anomaly Detection",
+                category: "AI/ML",
+                teamSize: 3,
+                description: "Anomaly Detection is an AI-powered engine within the Retain platform (Standalone app for POC) that continuously monitors workforce and project data to detect unusual patterns — before they turn into performance, utilization, or retention issues. Instead of relying on manually spot the errors, the system automatically find anomalies in real time — such as overutilization, skill mismatches — enabling proactive action and smarter decisions.",
+                members: ["Vishvanath BK", "Deepika Lokireddy", "Rudrayya S"],
+                techStack: ["Asp.Net", "C#", "React", "Machine Learning", "AI"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p96000062_advt-group_com/IQDv51V5vxK8Q4QqloZBQe1kAVORkgZU1TMt2ZmQ3fSP9gE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=tfvzSX",
+                liveUrl: null,
+                liked: true,
+                comments: 0
+            },
+            {
+                id: 9,
+                projectName: "Analytics Anywhere Within Retain",
+                teamName: "Analytics Anywhere Within Retain",
+                category: "Application Enhancement",
+                teamSize: 4,
+                description: "Deep linking the power bi reports in retain",
+                members: ["Chetan Kini", "Amruta Gurav", "Harsha Nalwad", "Deepa BC"],
+                techStack: ["Power BI", "Integration", "Analytics", "Retain Platform"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063092_advt-group_com/IQACYkLJq4KeRLQqs4Lk8iHzAbVkiQEB9p6nudrBZdaZ7sE?e=JwAdHk",
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 10,
+                projectName: "Quick Planner (Browser Extension)",
+                teamName: "Quick Planner (Browser Extension)",
+                category: "Browser Extension",
+                teamSize: 1,
+                description: "Browser extension for quick planning and task management directly from your browser.",
+                members: ["Ranjan, Rajeev"],
+                techStack: ["JavaScript", "Browser Extension", "Chrome API", "UI/UX"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 11,
+                projectName: "Streamlined API Testing With Postman",
+                teamName: "Streamlined API Testing With Postman",
+                category: "API Testing",
+                teamSize: 1,
+                description: "APIs play a crucial role in modern development, acting as the essential bridge between modules, applications, and platforms. However, testing these integrations, especially when handling highly secure data, is critically important, time-consuming, and complex. Effective API testing requires deep knowledge of both front-end and back-end systems. This project aims to automate API test cases efficiently.",
+                members: ["Basavaraju, Puneeth"],
+                techStack: ["Postman", "API Testing", "Automation", "REST", "Integration"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: true,
+                comments: 0
+            },
+            {
+                id: 12,
+                projectName: "AI Powered Documentation",
+                teamName: "AI Powered Documentation",
+                category: "AI/ML",
+                teamSize: 3,
+                description: "Create technical documentation for Retain frontend or backend. This will not be full-fledge documentation, however we can show for particular module etc.",
+                members: ["Mohan B", "Sangam Vinayaka", "Yadav, Mritunjay"],
+                techStack: ["AI", "Documentation", "Automation", "NLP", "Frontend", "Backend"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 13,
+                projectName: "AI Chatbot For WFM Mobile App",
+                teamName: "AI Chatbot For WFM Mobile App",
+                category: "Mobile App",
+                teamSize: 1,
+                description: "Create HSA through conversation rather than using UI",
+                members: ["Dhananjaya, Nithin"],
+                techStack: ["AI", "Chatbot", "Mobile", "NLP", "Conversational UI"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            }
+        ];
+
+        // State
+        let filteredTeams = [...teams];
+
+        // Render Projects
+        function renderProjects() {
+            const grid = document.getElementById('projectGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredTeams.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            grid.innerHTML = filteredTeams.map(team => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-top">
+                            <div>
+                                <div class="project-name">${team.projectName}</div>
+                                <div class="team-info">
+                                    <span class="team-name">
+                                        <span>👥</span>
+                                        <span>${team.teamName}</span>
+                                    </span>
+                                    <span class="team-size">
+                                        <span>👤</span>
+                                        <span>${team.teamSize} member${team.teamSize > 1 ? 's' : ''}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="category-badge">${team.category}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="description">${team.description}</div>
+                        
+                        <div class="section">
+                            <div class="section-title">
+                                <span>👥</span>
+                                <span>Team Members</span>
+                            </div>
+                            <div class="tags">
+                                ${team.members.map(member => `<span class="tag member">${member}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <div class="section-title">
+                                <span>⚡</span>
+                                <span>Tech Stack</span>
+                            </div>
+                            <div class="tags">
+                                ${team.techStack.map(tech => `<span class="tag tech">${tech}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="buttons">
+                            ${team.demoUrl ? `<a href="${team.demoUrl}" target="_blank" class="btn btn-primary">
+                                <span>🎬</span>
+                                <span>Demo Recording</span>
+                            </a>` : ''}
+                            ${team.liveUrl ? `<a href="${team.liveUrl}" target="_blank" class="btn btn-secondary">
+                                <span>🌐</span>
+                                <span>Live Demo</span>
+                            </a>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="action ${team.liked ? 'liked' : ''}" onclick="toggleLike(${team.id})">
+                            <span>${team.liked ? '❤️' : '🤍'}</span>
+                            <span>${team.liked ? 'Liked' : 'Like'}</span>
+                        </div>
+                        <div class="action">
+                            <span>💬</span>
+                            <span>Comments (${team.comments})</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            updateTeamCount();
+        }
+
+        // Toggle Like
+        function toggleLike(teamId) {
+            const team = teams.find(t => t.id === teamId);
+            if (team) {
+                team.liked = !team.liked;
+                renderProjects();
+            }
+        }
+
+        // Update Team Count
+        function updateTeamCount() {
+            document.getElementById('teamCount').textContent = `${filteredTeams.length} Team${filteredTeams.length !== 1 ? 's' : ''}`;
+        }
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterProjects(searchTerm, document.getElementById('categoryFilter').value);
+        });
+
+        // Category Filter
+        document.getElementById('categoryFilter').addEventListener('change', (e) => {
+            const category = e.target.value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            filterProjects(searchTerm, category);
+        });
+
+        // Filter Projects
+        function filterProjects(searchTerm, category) {
+            filteredTeams = teams.filter(team => {
+                const matchesSearch = !searchTerm || 
+                    team.projectName.toLowerCase().includes(searchTerm) ||
+                    team.teamName.toLowerCase().includes(searchTerm) ||
+                    team.description.toLowerCase().includes(searchTerm) ||
+                    team.members.some(m => m.toLowerCase().includes(searchTerm)) ||
+                    team.techStack.some(t => t.toLowerCase().includes(searchTerm));
+                
+                const matchesCategory = !category || team.category === category;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            renderProjects();
+        }
+
+        // Initial Render
+        renderProjects();
+    </script>
+</body>
+</html>
