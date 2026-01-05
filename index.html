@@ -535,23 +535,37 @@
 
     <script>
         // Mock Data
-        const teams = [
+        const teams const teams = [
             {
                 id: 1,
                 projectName: "Powering Retain With AI",
                 teamName: "Powering Retain With AI",
                 category: "AI & Innovation",
                 teamSize: 1,
-                description: "A Retain AI MCP server that allows users to interact with Retain using natural language",
+                description: "An AI driven MCP server for Retain that lets users interact through natural language, unlocking intelligent, agent based access to data.",
                 members: ["Ranjan, Rajeev"],
                 techStack: ["ASP.NET Core 8.0", "C#", "Model Context Protocol (MCP)", "Identity Server"],
-                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063097_advt-group_com/IQAhwbFeJ2GkRK1UUzu9gPnPAf9zceuTwxk6tKOn5IYAf1w?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=oZkgDa",
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063097_advt-group_com/IQDGx7Lny2ucQqvF_nNY4Q7BAaeIC_ksmVoQtSY5WlRw-MI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=6372ma&xsdata=MDV8MDJ8fDY4MWJiMjQwM2M1ODQ5MTIzOGY0MDhkZTRjMTIyOWFifDFjNmVmZGQwNjlmOTQwMWY4ZTk3YTE2YTIzMDZjYmM0fDB8MHw2MzkwMzE4MzgwMjU0MDY1MDd8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T2pGa1kyTmxaamswTFRneU5HUXRORFJoTUMwNE5qRTFMVFEzTkdNNVpqWmtZMkZoTjE4ek5UY3pOemRpTnkwd1lqQTFMVFJsWldRdE9HVTRaaTFtWkRVek9XTTVNMlF4TnpCQWRXNXhMbWRpYkM1emNHRmpaWE12YldWemMyRm5aWE12TVRjMk56VTROekF3TVRjMU53PT18MGNjYzljZGI0NmIyNDc2MGE2NjEwOGRlNGMxMjI5YWF8NTE1ZWYyOTVkMzk2NDdkMzgwMjk0NmUzMGM4ODVlNjQ%3D&sdata=UUduMDlCcVR1aHlUTDlxNkJBdVVHTGxSRWFLWGJKWDd0THJ3aWV1VUVRND0%3D&ovuser=1c6efdd0-69f9-401f-8e97-a16a2306cbc4%2CP95063100%40advt-group.com",
                 liveUrl: null,
                 liked: false,
                 comments: 1
             },
             {
                 id: 2,
+                projectName: "AI QA Assistant",
+                teamName: "AI QA Assistant",
+                category: "Automation",
+                teamSize: 4,
+                description: "Automating the Web Using Natural Language",
+                members: ["Sourabh SS", "Auditya Reddy", "Draxayani Patil", "Hariprasath Padmanaban"],
+                techStack: ["Playwright", "Model Context Protocol (MCP)"],
+                demoUrl: null,
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 3,
                 projectName: "Azure Key Vault Manager",
                 teamName: "Keyvault Utility",
                 category: "DevOps",
@@ -560,54 +574,12 @@
                 members: ["Sargur, Nandish", "Yadav, Mritunjay"],
                 techStack: ["Azure", "Key Vault", "React", "Javascript", "ASP.NET Core", "DevOps", "C#"],
                 demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063100_advt-group_com/IQBhZocjucTlQrb8fe3mU2aRAcXBTPxvoDl9KNuH8t-_Fmw?e=Z2dKPm",
-                liveUrl: "https://hackathon-frontend-efgyhhd8dnhpgahb.eastus-01.azurewebsites.net/",
-                liked: false,
-                comments: 0
-            },
-            {
-                id: 3,
-                projectName: "DevOps Cost Optimization",
-                teamName: "Nagaraj, Varun",
-                category: "DevOps",
-                teamSize: 1,
-                description: "Identify unused resources and highlight cost-saving opportunities and best practices.",
-                members: ["Nagaraj, Varun"],
-                techStack: ["Azure", "Cost Management", "PowerBI", "Python"],
-                demoUrl: null,
                 liveUrl: null,
                 liked: false,
                 comments: 0
             },
             {
                 id: 4,
-                projectName: "Virtual Desktop (IT)",
-                teamName: "Virtual Desktop (IT)",
-                category: "Infrastructure",
-                teamSize: 1,
-                description: "Explore virtual desktop solutions for improved flexibility and security.",
-                members: ["Ashokkumar, Ragu"],
-                techStack: ["Azure Virtual Desktop", "Windows 365", "Citrix"],
-                demoUrl: null,
-                liveUrl: null,
-                liked: false,
-                comments: 0
-            },
-            {
-                id: 5,
-                projectName: "AI QA Assistant",
-                teamName: "AI QA Assistant",
-                category: "Automation",
-                teamSize: 4,
-                description: "Automating the Web Using Natural Language",
-                members: ["Sourabh SS", "Auditya Reddy", "Draxayani Patil", "Hariprasath Padmanaban"],
-                techStack: ["Playwright", "Model Context Protocol (MCP)"],
-                demoUrl: "https://advtgroup-my.sharepoint.com/:f:/g/personal/p95063095_advt-group_com/IgDiA9cgRgWrRrMtPy95S_3HAQpPXNQv7sW3K5QcCEoKiXw?e=fs1wmV",
-                liveUrl: null,
-                liked: false,
-                comments: 0
-            },
-            {
-                id: 6,
                 projectName: "Automated Database Change Tracker And Wiki Updater",
                 teamName: "Automated Database Change Tracker And Wiki Updater",
                 category: "Tool",
@@ -621,13 +593,13 @@
                 comments: 0
             },
             {
-                id: 7,
+                id: 5,
                 projectName: "Product Usage Tracking",
                 teamName: "Product Usage Tracking",
                 category: "Tool",
                 teamSize: 3,
                 description: "Interactive dashboard for tracking and optimizing cloud spending across multiple providers.",
-                members: ["Vani H U", "Abhishek Anand", "Shaila"],
+                members: ["Vani H U", "Abhishek Anand", "Shenoy, Shaila"],
                 techStack: ["Asp.Net", "C#", "React"],
                 demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063099_advt-group_com/IQDLwA6-H1H-QIs7br70Jp73AWAtNT7SBxkkVAnEEF3bvEQ?e=R1HxtH",
                 liveUrl: null,
@@ -635,7 +607,7 @@
                 comments: 0
             },
             {
-                id: 8,
+                id: 6,
                 projectName: "Anomaly Detection",
                 teamName: "Anomaly Detection",
                 category: "AI/ML",
@@ -649,7 +621,7 @@
                 comments: 0
             },
             {
-                id: 9,
+                id: 7,
                 projectName: "Analytics Anywhere Within Retain",
                 teamName: "Analytics Anywhere Within Retain",
                 category: "Application Enhancement",
@@ -663,35 +635,35 @@
                 comments: 0
             },
             {
-                id: 10,
+                id: 8,
                 projectName: "Quick Planner (Browser Extension)",
                 teamName: "Quick Planner (Browser Extension)",
                 category: "Browser Extension",
                 teamSize: 1,
-                description: "Browser extension for quick planning and task management directly from your browser.",
-                members: ["Ranjan, Rajeev"],
+                description: "A browser extension for quick planning and task management directly from your browser, with instant notifications wherever you are. Stay informed both within the browser and through Windows notifications.",
+                members: ["Ranjan, Rajeev", "NA, Rachana"],
                 techStack: ["JavaScript", "Browser Extension", "Chrome API", "UI/UX"],
-                demoUrl: null,
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063097_advt-group_com/IQCfji7okUUdT6X8pPrzt2x8AeyoXU3eN2kyyVDVBh0aBMw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=cifcBi&xsdata=MDV8MDJ8fDY4MWJiMjQwM2M1ODQ5MTIzOGY0MDhkZTRjMTIyOWFifDFjNmVmZGQwNjlmOTQwMWY4ZTk3YTE2YTIzMDZjYmM0fDB8MHw2MzkwMzE4MzgwMjU0MzEzOTV8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T2pGa1kyTmxaamswTFRneU5HUXRORFJoTUMwNE5qRTFMVFEzTkdNNVpqWmtZMkZoTjE4ek5UY3pOemRpTnkwd1lqQTFMVFJsWldRdE9HVTRaaTFtWkRVek9XTTVNMlF4TnpCQWRXNXhMbWRpYkM1emNHRmpaWE12YldWemMyRm5aWE12TVRjMk56VTROekF3TVRjMU53PT18MGNjYzljZGI0NmIyNDc2MGE2NjEwOGRlNGMxMjI5YWF8NTE1ZWYyOTVkMzk2NDdkMzgwMjk0NmUzMGM4ODVlNjQ%3D&sdata=eTN2VzNLRTdxS3pEejZCWXBXdSs3cVdzTmhiejBzRHFHR1ZxSUptZkRHQT0%3D&ovuser=1c6efdd0-69f9-401f-8e97-a16a2306cbc4%2CP95063100%40advt-group.com",
                 liveUrl: null,
                 liked: false,
                 comments: 0
             },
             {
-                id: 11,
+                id: 9,
                 projectName: "Streamlined API Testing With Postman",
                 teamName: "Streamlined API Testing With Postman",
-                category: "API Testing",
+                category: "API Testing, Automation",
                 teamSize: 1,
                 description: "APIs play a crucial role in modern development, acting as the essential bridge between modules, applications, and platforms. However, testing these integrations, especially when handling highly secure data, is critically important, time-consuming, and complex. Effective API testing requires deep knowledge of both front-end and back-end systems. This project aims to automate API test cases efficiently.",
                 members: ["Basavaraju, Puneeth"],
                 techStack: ["Postman", "API Testing", "Automation", "REST", "Integration"],
-                demoUrl: null,
+                demoUrl: "https://advtgroup-my.sharepoint.com/personal/p95063451_advt-group_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fp95063451%5Fadvt%2Dgroup%5Fcom%2FDocuments%2FADVT%20Screenshots%2FHackathon%20project%2FSteamlined%20API%20testing%20with%20postman%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E598a8b3f%2Dfbe6%2D44fc%2Dae19%2Ddd02b546530b",
                 liveUrl: null,
                 liked: true,
                 comments: 0
             },
             {
-                id: 12,
+                id: 10,
                 projectName: "AI Powered Documentation",
                 teamName: "AI Powered Documentation",
                 category: "AI/ML",
@@ -699,6 +671,34 @@
                 description: "Create technical documentation for Retain frontend or backend. This will not be full-fledge documentation, however we can show for particular module etc.",
                 members: ["Mohan B", "Sangam Vinayaka", "Yadav, Mritunjay"],
                 techStack: ["AI", "Documentation", "Automation", "NLP", "Frontend", "Backend"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063647_advt-group_com/IQCU3INwIOtnSaKi-nJw-OS2AZAQ0Jd45eumH9uA7zDUv6Q?e=zVUujM",
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 11,
+                projectName: "MiTime Assistant WFM",
+                teamName: "AI Chatbot For WFM Mobile App",
+                category: "Mobile App",
+                teamSize: 1,
+                description: "An intelligent personal and managerial assistant that integrates with MiTime to handle leave approvals, clash detection, and personal work-history tracking using natural language",
+                members: ["Dhananjaya, Nithin"],
+                techStack: ["React Native", "Node.js", "Express", "OpenAI GPT-4o"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/:v:/r/personal/p95063394_advt-group_com/Documents/MiTime_Assistant_WFM.mov?csf=1&web=1&e=t9Wl5o",
+                liveUrl: null,
+                liked: false,
+                comments: 0
+            },
+            {
+                id: 12,
+                projectName: "Virtual Desktop (IT)",
+                teamName: "Virtual Desktop (IT)",
+                category: "Infrastructure",
+                teamSize: 1,
+                description: "Explore virtual desktop solutions for improved flexibility and security.",
+                members: ["Ashokkumar, Ragu"],
+                techStack: ["Azure Virtual Desktop", "Windows 365", "Citrix"],
                 demoUrl: null,
                 liveUrl: null,
                 liked: false,
@@ -706,18 +706,18 @@
             },
             {
                 id: 13,
-                projectName: "AI Chatbot For WFM Mobile App",
-                teamName: "AI Chatbot For WFM Mobile App",
-                category: "Mobile App",
+                projectName: "Devops Cost Optimization",
+                teamName: "Identify unused resources and highlight cost-saving opportunities and best practices.",
+                category: "DevOps",
                 teamSize: 1,
-                description: "Create HSA through conversation rather than using UI",
-                members: ["Dhananjaya, Nithin"],
-                techStack: ["AI", "Chatbot", "Mobile", "NLP", "Conversational UI"],
-                demoUrl: null,
+                description: "This project focuses on finding Azure resources that are not being used and removing them to save money and improve security. It uses the Azure Orphaned Resources Workbook to scan for unused resources, show potential cost savings, and guide safe cleanup. The project also shares best practices to avoid accidental deletions and keep the environment organized.",
+                members: ["Nagaraj, Varun"],
+                techStack: ["Azure Portal","Azure Workbooks","Azure Resource Graph","Cost Management"],
+                demoUrl: "https://advtgroup-my.sharepoint.com/personal/p96000155_advt-group_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fp96000155_advt-group_com%2FDocuments%2FAzure+Workbook+Recording+2026-01-04+180854.mp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&startedResponseCatch=true&referrer=StreamWebApp.Web&referrerScenario=AddressBarCopied.view.b2406836-7589-4ac8-97ea-6fde52f373e6",
                 liveUrl: null,
                 liked: false,
                 comments: 0
-            }
+            },
         ];
 
         // State
@@ -860,4 +860,5 @@
 </body>
 
 </html>
+
 
