@@ -250,6 +250,7 @@
             background: var(--card-header-bg);
             padding: 20px;
             color: var(--text-white);
+            position: relative;
         }
 
         .card-header-top {
@@ -272,6 +273,40 @@
             font-size: 12px;
             font-weight: 500;
             white-space: nowrap;
+        }
+
+        .prize-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #8b6914;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+            animation: prize-glow 2s ease-in-out infinite;
+        }
+
+        .prize-badge.first {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #8b6914;
+        }
+
+        .prize-badge.second {
+            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+            color: #4a4a4a;
+        }
+
+
+        @keyframes prize-glow {
+            0%, 100% { box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6); }
         }
 
         .team-info {
@@ -548,7 +583,8 @@
                 demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063092_advt-group_com/IQACYkLJq4KeRLQqs4Lk8iHzAbVkiQEB9p6nudrBZdaZ7sE?e=JwAdHk",
                 liveUrl: null,
                 liked: false,
-                comments: 0
+                comments: 0,
+                prize: "second"
             },
             {
                 id: 2,
@@ -562,7 +598,8 @@
                 demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063097_advt-group_com/IQDGx7Lny2ucQqvF_nNY4Q7BAaeIC_ksmVoQtSY5WlRw-MI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=6372ma&xsdata=MDV8MDJ8fDY4MWJiMjQwM2M1ODQ5MTIzOGY0MDhkZTRjMTIyOWFifDFjNmVmZGQwNjlmOTQwMWY4ZTk3YTE2YTIzMDZjYmM0fDB8MHw2MzkwMzE4MzgwMjU0MDY1MDd8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T2pGa1kyTmxaamswTFRneU5HUXRORFJoTUMwNE5qRTFMVFEzTkdNNVpqWmtZMkZoTjE4ek5UY3pOemRpTnkwd1lqQTFMVFJsWldRdE9HVTRaaTFtWkRVek9XTTVNMlF4TnpCQWRXNXhMbWRpYkM1emNHRmpaWE12YldWemMyRm5aWE12TVRjMk56VTROekF3TVRjMU53PT18MGNjYzljZGI0NmIyNDc2MGE2NjEwOGRlNGMxMjI5YWF8NTE1ZWYyOTVkMzk2NDdkMzgwMjk0NmUzMGM4ODVlNjQ%3D&sdata=UUduMDlCcVR1aHlUTDlxNkJBdVVHTGxSRWFLWGJKWDd0THJ3aWV1VUVRND0%3D&ovuser=1c6efdd0-69f9-401f-8e97-a16a2306cbc4%2CP95063100%40advt-group.com",
                 liveUrl: null,
                 liked: false,
-                comments: 1
+                comments: 1,
+                prize: "first"
             },
             {
                 id: 3,
@@ -576,7 +613,8 @@
                 demoUrl: "https://advtgroup-my.sharepoint.com/:v:/g/personal/p95063095_advt-group_com/IQDPaJyt3o-zSoFvYB1VxwL_AU7CwOBOQmczB9yODl3B2A4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=r7y62M",
                 liveUrl: null,
                 liked: false,
-                comments: 0
+                comments: 0,
+                prize: "second"
             },
             {
                 id: 4,
@@ -740,6 +778,10 @@
             grid.innerHTML = filteredTeams.map(team => `
                 <div class="card">
                     <div class="card-header">
+                         ${team.prize ? `<div class="prize-badge ${team.prize === 'first' ? 'first' : 'second'}">
+                            <span>${team.prize === 'first' ? '🥇' : '🥈'}</span>
+                            <span>${team.prize === 'first' ? '1st Prize' : '2nd Prize'}</span>
+                        </div>` : ''}
                         <div class="card-header-top">
                             <div>
                                 <div class="project-name">${team.projectName}</div>
@@ -860,13 +902,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
